@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TUCASA UDSM Mabibo — Safari Njema</title>
+<title>Safari Njema — Mayunga</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -56,7 +56,7 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--text);
 .screen.on{display:flex;animation:in .6s ease}
 @keyframes in{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
 
-/* ===== AUTH CARD (Neon Glass) ===== */
+/* ===== AUTH CARD ===== */
 .card{position:relative;width:100%;max-width:420px;
  background:var(--card);border-radius:16px;
  box-shadow:0 0 30px rgba(157,78,221,0.2), 0 0 0 1px var(--border);
@@ -64,21 +64,18 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--text);
  overflow:hidden;max-height:90vh;display:flex;flex-direction:column;
  transition:all .4s ease}
 
-/* Headers */
 .auth-header{padding:24px 24px 0;text-align:center}
 h1.title{font-family:'Cinzel',serif;font-size:22px;font-weight:600;
  letter-spacing:3px;color:var(--text);text-align:center;margin-bottom:4px}
 .gold-line{width:50px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));margin:0 auto 12px;border-radius:2px;box-shadow:0 0 10px var(--purple)}
 .hint{font-size:12px;color:var(--muted);text-align:center;margin-bottom:12px}
 
-/* Forms container */
 .forms{display:flex;flex-direction:column;overflow-y:auto;padding:0 24px 24px}
 .box{display:flex;flex-direction:column;gap:10px;width:100%}
 .box.up{display:none}
 .card.reg .box.in{display:none}
 .card.reg .box.up{display:flex}
 
-/* Inputs */
 input,select{width:100%;border:1px solid var(--border);
  background:var(--field);color:var(--text);
  padding:12px 14px;border-radius:8px;font:inherit;font-size:13px;
@@ -88,7 +85,6 @@ input::placeholder{color:var(--muted)}
 label.lbl{font-size:10px;color:var(--cyan);letter-spacing:1px;
  text-transform:uppercase;margin-bottom:-4px;font-weight:600}
 
-/* Buttons */
 .btn{background:linear-gradient(135deg,var(--purple),var(--pink));
  color:#fff;border:0;border-radius:8px;padding:13px 24px;
  font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
@@ -196,7 +192,7 @@ label.lbl{font-size:10px;color:var(--cyan);letter-spacing:1px;
 <div class="screen" id="auth">
  <div class="card" id="card">
   <div class="auth-header">
-   <h1 class="title">TUCASA UDSM MABIBO</h1>
+   <h1 class="title">SAFARI NJEMA</h1>
    <div class="gold-line"></div>
    <p class="hint" id="authHint">Ingia kwa barua pepe yako</p>
   </div>
@@ -241,20 +237,20 @@ label.lbl{font-size:10px;color:var(--cyan);letter-spacing:1px;
 <!-- ===== WELCOME ===== -->
 <div class="screen rom" id="welcome">
  <div class="dove">🕊️</div>
- <h2 class="big">Karibu,<br><b><span id="jina1">Mwanachama</span></b></h2>
- <p class="sub">TUCASA UDSM Mabibo inakupokea kwa mikono miwili.</p>
+ <h2 class="big">Karibu,<br><b><span id="jina1">Rafiki</span></b></h2>
+ <p class="sub">Bwana akutangulie katika safari yako, na akulinde njiani.</p>
  <div class="btns"><button class="btn cyan-btn" data-next="letter">KARIBU 🙏</button></div>
 </div>
 
 <!-- ===== BARAKA ===== -->
 <div class="screen rom" id="letter">
- <h2 class="big">Baraka za <b>safari</b></h2>
+ <h2 class="big">Baraka za <b>safari</b> yako</h2>
  <div class="letter">
-  <p><span id="jina2">Mwanachama</span>, tunakushukuru kwa kuwa sehemu ya familia yetu ya TUCASA UDSM Mabibo.</p>
+  <p><span id="jina2">Rafiki</span>, nakushukuru kwa kuwa rafiki yangu wa karibu. Nakutakia mema kila hatua unayoichukua.</p>
   <p class="verse">"Bwana akulinde na kila uovu; Bwana aulinde uhai wako. Bwana aulinde uende na uje, tangu sasa na hata milele." — Zaburi 121:7-8</p>
-  <p>Tunakutakia safari njema unaporejea masomoni. Mungu akutangulie, akulinde njiani, na akufikishe salama UDSM.</p>
+  <p>Nakutakia safari njema unaporejea masomoni. Mungu akutangulie, akulinde njiani, na akufikishe salama UDSM.</p>
   <p class="verse">"Usiuogope, kwa maana mimi ni pamoja nawe; nitakutia nguvu, naam, nitakusaidia." — Isaya 41:10</p>
-  <p class="sig">Wenu katika Kristo,<br>TUCASA UDSM MABIBO</p>
+  <p class="sig">Kutoka kwa,<br>Mr. Mayunga ✍️</p>
  </div>
  <div class="btns"><button class="btn cyan-btn" data-next="sendoff">ENDELEA</button></div>
 </div>
@@ -262,8 +258,8 @@ label.lbl{font-size:10px;color:var(--cyan);letter-spacing:1px;
 <!-- ===== SEND-OFF + COUNTDOWN ===== -->
 <div class="screen rom" id="sendoff">
  <div class="dove">🙏</div>
- <h2 class="big"><b><span id="jina3">Mwanachama</span></b>, safari njema</h2>
- <p class="sub" id="sendsub">Tunakuombea safari salama, afya njema, na mafanikio katika masomo yako.</p>
+ <h2 class="big"><b><span id="jina3">Rafiki</span></b>, safari njema</h2>
+ <p class="sub" id="sendsub">Nakuombea safari salama, afya njema, na mafanikio katika masomo yako.</p>
 
  <div class="cd-wrap" id="countdown">
    <div class="cd-box"><b id="cd-d">0</b><small>Siku</small></div>
@@ -271,7 +267,7 @@ label.lbl{font-size:10px;color:var(--cyan);letter-spacing:1px;
    <div class="cd-box"><b id="cd-m">0</b><small>Dakika</small></div>
    <div class="cd-box"><b id="cd-s">0</b><small>Sekunde</small></div>
  </div>
- <p class="cd-sign">⏳ Countdown ya Mayunga</p>
+ <p class="cd-sign">⏳ Countdown ya safari yako</p>
 
  <div class="btns">
   <button class="btn gold-btn" id="amina">AMINA 🙏</button>
@@ -295,7 +291,7 @@ const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const $ = id => document.getElementById(id);
-let mwanachama = { jina: "Mwanachama", tarehe_safari: null };
+let mwanachama = { jina: "Rafiki", tarehe_safari: null };
 
 /* ===== SCREENS ===== */
 function show(id){
@@ -305,7 +301,7 @@ function show(id){
 /* ===== BADILISHA AUTH ===== */
 $('sw1').onclick = () => {
  $('card').classList.add('reg');
- $('authHint').textContent = "Weka taarifa zako ili tukuandikie baraka";
+ $('authHint').textContent = "Weka taarifa zako ili nikubariki";
  $('forms').scrollTop = 0;
 };
 $('sw2').onclick = () => {
@@ -316,7 +312,7 @@ $('sw2').onclick = () => {
 
 /* ===== WEKA JINA KILA MAHALI ===== */
 function wekaJina(jina){
- mwanachama.jina = jina || "Mwanachama";
+ mwanachama.jina = jina || "Rafiki";
  ['jina1','jina2','jina3'].forEach(id => $(id).textContent = mwanachama.jina);
 }
 
@@ -351,8 +347,13 @@ $('go2').onclick = async () => {
 
  if(error){ $('er2').textContent = error.message; return; }
 
- $('ok2').textContent = '✓ Umejisajili! Tunakupokea...';
- setTimeout(() => ingiaKwenyeMfumo(data.user), 800);
+ if (data.session) {
+   $('ok2').textContent = '✓ Umejisajili! Tunakupokea...';
+   setTimeout(() => ingiaKwenyeMfumo(data.user), 800);
+ } else {
+   $('ok2').textContent = '✓ Umejisajili! Tafadhali ingia kwa barua pepe na nenosiri lako.';
+   $('card').classList.remove('reg');
+ }
 };
 
 /* ===== INGIA ===== */
@@ -414,9 +415,9 @@ setInterval(updateCountdown, 1000);
 /* ===== AMINA ===== */
 const aminaMsg = [
  "Asante kwa kusema Amina 🙏 Mungu akubariki.",
- "Neema na amani ziwe nawe, mwanachama.",
+ "Neema na amani ziwe nawe, rafiki yangu.",
  "Bwana akulinde njiani, na akufikishe salama.",
- "Tunakuombea kila siku. Karibu tena Mabibo!"
+ "Nakuombea kila siku. Karibu tena Mabibo!"
 ];
 let iA = 0;
 $('amina').onclick = () => {
@@ -482,4 +483,4 @@ function confetti(){
 })();
 </script>
 </body>
-</html>
+     </html>
