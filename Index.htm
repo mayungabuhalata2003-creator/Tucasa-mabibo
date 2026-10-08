@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TUCASA UDSM Mabibo — Safari Njema</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#fdf6ec;--bg2:#f5e6d3;--card:#fffaf3;
+ --text:#1a1410;--muted:#8b6f47;
+ --gold:#b8860b;--gold-light:#d4a72c;
+ --field:#f5ead7;--rose:#8b1e3f;
+}
+@media (prefers-color-scheme:dark){:root{
+ --bg:#1a1410;--bg2:#2a1f15;--card:#241b12;
+ --text:#f5e6d3;--muted:#b89878;
+ --gold:#d4a72c;--gold-light:#e8be55;
+ --field:#332618;
+}}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{font-family:'Lora',Georgia,serif;color:var(--text);
+ background:linear-gradient(135deg,var(--bg),var(--bg2));
+ display:flex;align-items:center;justify-content:center;
+ min-height:100vh;padding:16px;overflow-x:hidden}
+
+/* ===== WATERMARK MAYUNGA ===== */
+.wm-corner{position:fixed;top:14px;right:14px;z-index:999;
+ font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:1.5px;
+ color:var(--gold);background:rgba(255,250,243,.7);
+ padding:6px 16px;border-radius:2px;border:1px solid var(--gold);
+ backdrop-filter:blur(6px);pointer-events:none;user-select:none;
+ animation:wmPulse 4s ease-in-out infinite}
+@keyframes wmPulse{0%,100%{opacity:.8}50%{opacity:1}}
+@media (prefers-color-scheme:dark){.wm-corner{background:rgba(36,27,18,.75)}}
+
+.wm-bg{position:fixed;top:50%;left:50%;
+ font-family:'Cinzel',serif;font-weight:700;font-style:italic;
+ font-size:clamp(70px,20vw,200px);color:var(--gold);opacity:.05;
+ z-index:0;pointer-events:none;user-select:none;
+ letter-spacing:16px;white-space:nowrap;
+ animation:wmFloat 24s ease-in-out infinite}
+@keyframes wmFloat{
+ 0%{transform:translate(-50%,-50%) rotate(-25deg)}
+ 25%{transform:translate(-48%,-52%) rotate(-20deg)}
+ 50%{transform:translate(-52%,-48%) rotate(-30deg)}
+ 75%{transform:translate(-50%,-53%) rotate(-22deg)}
+ 100%{transform:translate(-50%,-50%) rotate(-25deg)}}
+
+@media (max-width:640px){
+ .wm-corner{font-size:11px;padding:5px 11px;top:8px;right:8px;letter-spacing:1px}
+ .wm-bg{font-size:clamp(50px,28vw,130px);letter-spacing:8px}}
+
+/* ===== SCREENS ===== */
+.screen{display:none;width:100%;justify-content:center;align-items:center;
+ position:relative;z-index:2}
+.screen.on{display:flex;animation:in .6s ease}
+@keyframes in{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+
+/* ===== LOGIN/REGISTER ===== */
+.card{position:relative;width:780px;max-width:100%;
+ background:var(--card);border-radius:4px;
+ box-shadow:0 20px 60px rgba(184,134,11,.15),0 0 0 1px rgba(184,134,11,.2);
+ overflow:hidden;min-height:560px}
+.box{position:absolute;top:0;left:0;width:100%;height:100%;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ padding:30px 40px;gap:12px;transition:all .5s ease}
+.box.up{opacity:0;pointer-events:none}
+.card.reg .box.in{opacity:0;pointer-events:none}
+.card.reg .box.up{opacity:1;pointer-events:auto}
+
+h1.title{font-family:'Cinzel',serif;font-size:26px;font-weight:600;
+ letter-spacing:3px;color:var(--text);text-align:center;margin-bottom:4px}
+.gold-line{width:50px;height:2px;background:var(--gold);margin:0 auto 12px}
+
+.soc{font-size:22px;letter-spacing:6px;margin-bottom:6px}
+.hint{font-size:12px;color:var(--muted);text-align:center;
+ font-style:italic;letter-spacing:.5px;margin-bottom:6px}
+
+input,select{width:100%;max-width:340px;border:1px solid var(--field);
+ background:var(--field);color:var(--text);
+ padding:11px 14px;border-radius:2px;font:inherit;font-size:13px;
+ outline:0;transition:border .2s}
+input:focus,select:focus{border-color:var(--gold);background:var(--card)}
+label.lbl{font-size:11px;color:var(--muted);letter-spacing:1px;
+ text-transform:uppercase;width:100%;max-width:340px;
+ text-align:left;margin-bottom:-6px}
+
+.btn{background:var(--text);color:var(--bg);border:0;
+ border-radius:2px;padding:12px 44px;font-family:'Cinzel',serif;
+ font-size:12px;font-weight:600;letter-spacing:2px;cursor:pointer;
+ transition:all .25s;margin-top:6px}
+.btn:hover{background:var(--gold);color:#fff;transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.sw{display:block;margin-top:16px;font-size:12px;color:var(--gold);
+ background:none;border:0;font:inherit;font-style:italic;
+ cursor:pointer;letter-spacing:.5px}
+.sw:hover{text-decoration:underline}
+
+.err{color:var(--rose);min-height:16px;font-size:12px;font-style:italic;
+ text-align:center}
+.ok{color:var(--gold);min-height:16px;font-size:12px;font-style:italic;
+ text-align:center}
+
+/* ===== SPIRITUAL SCREENS ===== */
+.rom{flex-direction:column;text-align:center;max-width:580px;
+ gap:20px;padding:20px}
+.big{font-family:'Cinzel',serif;font-weight:600;
+ font-size:clamp(28px,6.5vw,46px);line-height:1.3;
+ letter-spacing:2px;color:var(--text)}
+.big b{color:var(--gold);font-weight:700}
+.sub{color:var(--muted);font-size:14px;font-style:italic;line-height:1.6}
+.dove{font-size:52px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.letter{background:var(--card);border-radius:4px;padding:32px 28px;
+ box-shadow:0 20px 50px rgba(184,134,11,.15),0 0 0 1px rgba(184,134,11,.2);
+ text-align:left;display:flex;flex-direction:column;gap:16px;
+ border-top:3px solid var(--gold);max-width:520px}
+.letter p{font-size:15px;line-height:1.8;opacity:0;
+ transform:translateY(10px);animation:rise .8s ease forwards}
+.letter p:nth-child(1){animation-delay:.2s}
+.letter p:nth-child(2){animation-delay:1.4s}
+.letter p:nth-child(3){animation-delay:2.6s}
+.letter p:nth-child(4){animation-delay:3.8s}
+.letter p:nth-child(5){animation-delay:5s}
+.letter .verse{font-family:'Lora',serif;font-style:italic;color:var(--gold);
+ font-size:14px;border-left:2px solid var(--gold);padding-left:14px}
+.letter .sig{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);
+ text-align:right;letter-spacing:1px;font-weight:600}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ===== COUNTDOWN ===== */
+.cd-wrap{display:flex;gap:12px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.cd-box{background:var(--card);border:1px solid var(--gold);
+ border-radius:2px;padding:12px 16px;min-width:76px;
+ box-shadow:0 8px 20px rgba(184,134,11,.12);transition:transform .3s}
+.cd-box:hover{transform:translateY(-3px)}
+.cd-box b{display:block;font-family:'Cinzel',serif;font-size:26px;
+ font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;
+ letter-spacing:1px}
+.cd-box small{font-size:9px;color:var(--muted);letter-spacing:2px;
+ text-transform:uppercase;font-family:'Cinzel',serif}
+.cd-sign{font-family:'Lora',serif;font-style:italic;font-size:12px;
+ color:var(--gold);letter-spacing:1.5px;margin-top:10px}
+
+.btns{position:relative;display:flex;gap:14px;justify-content:center;
+ align-items:center;flex-wrap:wrap;margin-top:8px}
+.gold-btn{background:var(--gold);color:#fff}
+.gold-btn:hover{background:var(--gold-light)}
+
+/* ===== DECORATION ===== */
+.fl{position:fixed;bottom:-40px;z-index:1;pointer-events:none;
+ animation:fly linear forwards;opacity:.6}
+@keyframes fly{to{transform:translateY(-115vh) rotate(15deg);opacity:0}}
+
+.loading{text-align:center;color:var(--gold);
+ font-family:'Cinzel',serif;letter-spacing:2px;font-size:13px}
+
+@media (max-width:640px){
+ .box{padding:24px 20px}
+ h1.title{font-size:22px;letter-spacing:2px}
+ .btn{padding:11px 34px;font-size:11px}
+ .cd-box{min-width:66px;padding:10px 12px}
+ .cd-box b{font-size:22px}}
+
+@media (prefers-reduced-motion:reduce){
+ .fl,.wm-bg,.dove{animation:none}
+ .letter p{animation:none;opacity:1;transform:none}
+ .screen.on{animation:none}}
+</style>
+</head>
+<body>
+
+<!-- WATERMARK YA MAYUNGA -->
+<div class="wm-corner">✍️ MAYUNGA</div>
+<div class="wm-bg">MAYUNGA</div>
+
+<!-- LOADING -->
+<div class="screen on" id="loading">
+ <p class="loading">🕊️ Inapakia...</p>
+</div>
+
+<!-- ===== AUTH ===== -->
+<div class="screen" id="auth">
+ <div class="card" id="card">
+
+  <!-- INGIA -->
+  <div class="box in">
+   <h1 class="title">TUCASA UDSM MABIBO HOSTEL</h1>
+   <div class="gold-line"></div>
+   <div class="soc">🕊️ 📖</div>
+   <p class="hint">Ingia kwa barua pepe yako</p>
+   <input id="e1" type="email" placeholder="Barua pepe" autocomplete="email">
+   <input id="p1" type="password" placeholder="Nenosiri" autocomplete="current-password">
+   <span class="err" id="er1"></span>
+   <button class="btn" id="go1">INGIA</button>
+   <button class="sw" id="sw1">Huna akaunti? Jisajili →</button>
+  </div>
+
+  <!-- JISAJILI -->
+  <div class="box up">
+   <h1 class="title">JIUNGE NASI</h1>
+   <div class="gold-line"></div>
+   <div class="soc">🕊️ 📖</div>
+   <p class="hint">Weka taarifa zako ili tukuandikie baraka</p>
+   <label class="lbl">Jina kamili</label>
+   <input id="n2" type="text" placeholder="mfano: John Mayunga" autocomplete="name">
+   <label class="lbl">Barua pepe</label>
+   <input id="e2" type="email" placeholder="barua@email.com" autocomplete="email">
+   <label class="lbl">Nenosiri (herufi 6+)</label>
+   <input id="p2" type="password" placeholder="••••••" autocomplete="new-password">
+   <label class="lbl">Namba ya simu</label>
+   <input id="s2" type="tel" placeholder="0712 345 678">
+   <label class="lbl">Block / Room (Mabibo)</label>
+   <input id="b2" type="text" placeholder="mfano: Block B, Room 12">
+   <label class="lbl">Mkoa unakoenda</label>
+   <input id="m2" type="text" placeholder="mfano: Mwanza">
+   <label class="lbl">Tarehe ya kurudi UDSM</label>
+   <input id="d2" type="date">
+   <label class="lbl">Ombi lako (si lazima)</label>
+   <input id="o2" type="text" placeholder="Andika ombi lako la maombi...">
+   <span class="err" id="er2"></span>
+   <span class="ok" id="ok2"></span>
+   <button class="btn" id="go2">JISAJILI</button>
+   <button class="sw" id="sw2">← Una akaunti? Ingia</button>
+  </div>
+
+ </div>
+</div>
+
+<!-- ===== WELCOME ===== -->
+<div class="screen rom" id="welcome">
+ <div class="dove">🕊️</div>
+ <h2 class="big">Karibu,<br><b><span id="jina1">Mwanachama</span></b></h2>
+ <p class="sub">TUCASA UDSM Mabibo inakupokea kwa mikono miwili.</p>
+ <div class="btns"><button class="btn" data-next="letter">KARIBU 🙏</button></div>
+</div>
+
+<!-- ===== BARAKA ===== -->
+<div class="screen rom" id="letter">
+ <h2 class="big">Baraka za <b>safari</b></h2>
+ <div class="letter">
+  <p><span id="jina2">Mwanachama</span>, tunakushukuru kwa kuwa sehemu ya familia yetu ya TUCASA UDSM Mabibo.</p>
+  <p class="verse">"Bwana akulinde na kila uovu; Bwana aulinde uhai wako. Bwana aulinde uende na uje, tangu sasa na hata milele." — Zaburi 121:7-8</p>
+  <p>Tunakutakia safari njema unaporejea masomoni. Mungu akutangulie, akulinde njiani, na akufikishe salama UDSM.</p>
+  <p class="verse">"Usiuogope, kwa maana mimi ni pamoja nawe; nitakutia nguvu, naam, nitakusaidia." — Isaya 41:10</p>
+  <p class="sig">Wenu katika Kristo,<br>TUCASA UDSM MABIBO </p>
+ </div>
+ <div class="btns"><button class="btn" data-next="sendoff">ENDELEA</button></div>
+</div>
+
+<!-- ===== SEND-OFF + COUNTDOWN ===== -->
+<div class="screen rom" id="sendoff">
+ <div class="dove">🙏</div>
+ <h2 class="big"><b><span id="jina3">Mwanachama</span></b>, safari njema</h2>
+ <p class="sub" id="sendsub">Tunakuombea safari salama, afya njema, na mafanikio katika masomo yako.</p>
+
+ <div class="cd-wrap" id="countdown">
+   <div class="cd-box"><b id="cd-d">0</b><small>Siku</small></div>
+   <div class="cd-box"><b id="cd-h">0</b><small>Saa</small></div>
+   <div class="cd-box"><b id="cd-m">0</b><small>Dakika</small></div>
+   <div class="cd-box"><b id="cd-s">0</b><small>Sekunde</small></div>
+ </div>
+ <p class="cd-sign">⏳ Countdown ya Mayunga</p>
+
+ <div class="btns">
+  <button class="btn gold-btn" id="amina">AMINA 🙏</button>
+  <button class="btn" id="tena">SOMA ZAIDI</button>
+  <button class="btn" id="toka" style="background:transparent;color:var(--muted);border:1px solid var(--field)">TOKA</button>
+ </div>
+</div>
+
+<!-- SUPABASE JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ============================================
+   SANIDI — ZIMEWEKWA TAYARI ✅
+============================================ */
+const SUPABASE_URL = "https://ffhyuzpyucwnaynztrda.supabase.co";
+const SUPABASE_KEY = "sb_publishable_HBGOjJSS3SgLZGIud-xNPg_BPrZKUMs";
+/* ============================================ */
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = id => document.getElementById(id);
+let mwanachama = { jina: "Mwanachama", tarehe_safari: null };
+
+/* ===== SCREENS ===== */
+function show(id){
+ document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
+}
+
+/* ===== BADILISHA AUTH ===== */
+$('sw1').onclick = () => $('card').classList.add('reg');
+$('sw2').onclick = () => $('card').classList.remove('reg');
+
+/* ===== WEKA JINA KILA MAHALI ===== */
+function wekaJina(jina){
+ mwanachama.jina = jina || "Mwanachama";
+ ['jina1','jina2','jina3'].forEach(id => $(id).textContent = mwanachama.jina);
+}
+
+/* ===== JISAJILI ===== */
+$('go2').onclick = async () => {
+ const jina = $('n2').value.trim();
+ const email = $('e2').value.trim();
+ const pass = $('p2').value;
+ const simu = $('s2').value.trim();
+ const block = $('b2').value.trim();
+ const mkoa = $('m2').value.trim();
+ const tarehe = $('d2').value;
+ const ombi = $('o2').value.trim();
+
+ $('er2').textContent = '';
+ $('ok2').textContent = '';
+
+ if(!jina || !email || !pass){ $('er2').textContent = 'Jaza jina, barua pepe, na nenosiri.'; return; }
+ if(pass.length < 6){ $('er2').textContent = 'Nenosiri liwe herufi 6 au zaidi.'; return; }
+ if(!tarehe){ $('er2').textContent = 'Weka tarehe yako ya safari.'; return; }
+
+ $('go2').disabled = true;
+ $('go2').textContent = 'INASAJILI...';
+
+ const { data, error } = await db.auth.signUp({
+   email, password: pass,
+   options: { data: { jina, simu, block, mkoa, tarehe_safari: tarehe, ombi } }
+ });
+
+ $('go2').disabled = false;
+ $('go2').textContent = 'JISAJILI';
+
+ if(error){ $('er2').textContent = error.message; return; }
+
+ $('ok2').textContent = '✓ Umejisajili! Tunakupokea...';
+ setTimeout(() => ingiaKwenyeMfumo(data.user), 800);
+};
+
+/* ===== INGIA ===== */
+$('go1').onclick = async () => {
+ const email = $('e1').value.trim();
+ const pass = $('p1').value;
+ $('er1').textContent = '';
+ if(!email || !pass){ $('er1').textContent = 'Jaza barua pepe na nenosiri.'; return; }
+
+ $('go1').disabled = true;
+ $('go1').textContent = 'INAINGIA...';
+
+ const { data, error } = await db.auth.signInWithPassword({ email, password: pass });
+
+ $('go1').disabled = false;
+ $('go1').textContent = 'INGIA';
+
+ if(error){ $('er1').textContent = error.message; return; }
+ ingiaKwenyeMfumo(data.user);
+};
+
+/* ===== PAKIA PROFILE NA ONESHA ===== */
+async function ingiaKwenyeMfumo(user){
+ if(!user) return;
+ const { data, error } = await db.from('profiles').select('*').eq('id', user.id).single();
+ if(error){ console.error(error); return; }
+
+ mwanachama = data;
+ wekaJina(data.jina);
+ if(data.tarehe_safari) mwanachama.tarehe_safari = new Date(data.tarehe_safari + 'T06:00:00').getTime();
+ updateCountdown();
+ show('welcome');
+}
+
+/* ===== NAVIGATION ===== */
+document.querySelectorAll('[data-next]').forEach(b => {
+ b.onclick = () => show(b.dataset.next);
+});
+
+/* ===== COUNTDOWN ===== */
+function updateCountdown(){
+ if(!mwanachama.tarehe_safari) return;
+ const tofauti = mwanachama.tarehe_safari - Date.now();
+ if(tofauti <= 0){
+   $('countdown').innerHTML = '<p class="cd-sign" style="font-size:18px">🕊️ Safari imefika! Mungu akubariki.</p>';
+   return;
+ }
+ const siku = Math.floor(tofauti / 86400000);
+ const saa = Math.floor((tofauti % 86400000) / 3600000);
+ const dk = Math.floor((tofauti % 3600000) / 60000);
+ const sk = Math.floor((tofauti % 60000) / 1000);
+ $('cd-d').textContent = siku;
+ $('cd-h').textContent = String(saa).padStart(2,'0');
+ $('cd-m').textContent = String(dk).padStart(2,'0');
+ $('cd-s').textContent = String(sk).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+
+/* ===== AMINA ===== */
+const aminaMsg = [
+ "Asante kwa kusema Amina 🙏 Mungu akubariki.",
+ "Neema na amani ziwe nawe, mwanachama.",
+ "Bwana akulinde njiani, na akufikishe salama.",
+ "Tunakuombea kila siku. Karibu tena Mabibo!"
+];
+let iA = 0;
+$('amina').onclick = () => {
+ $('sendsub').textContent = aminaMsg[iA % aminaMsg.length];
+ iA++;
+ for(let i=0;i<25;i++) setTimeout(confetti, i*70);
+};
+
+/* ===== SOMA ZAIDI ===== */
+const verses = [
+ {v:"Zaburi 91:11", t:"Kwa maana atakuagiza malaika zake wakuchunge katika njia zako zote."},
+ {v:"Yoshua 1:9", t:"Uwe hodari na mwenye moyo mkunjufu; usiogope, kwa maana Bwana, Mungu wako, yu pamoja nawe kila uendako."},
+ {v:"Mithali 3:5-6", t:"Mtegemee Bwana kwa moyo wako wote, wala usizitegemee akili zako mwenyewe."},
+ {v:"Zaburi 121:1-2", t:"Nainua macho yangu niutazame milima; msaada wangu watoka kwa Bwana, aliyefanya mbingu na dunia."},
+ {v:"Wafilipi 4:13", t:"Naweza mambo yote kwa yeye anitiaye nguvu."}
+];
+let iV = 0;
+$('tena').onclick = () => {
+ const v = verses[iV % verses.length]; iV++;
+ $('sendsub').innerHTML = '<em style="color:var(--gold)">"'+v.t+'"</em><br><br><strong style="font-family:Cinzel,serif;letter-spacing:1px">— '+v.v+'</strong>';
+};
+
+/* ===== TOKA ===== */
+$('toka').onclick = async () => {
+ await db.auth.signOut();
+ location.reload();
+};
+
+/* ===== DECORATION ===== */
+const rm = matchMedia('(prefers-reduced-motion:reduce)').matches;
+function flyDeco(){
+ if(rm || $('auth').classList.contains('on') || $('loading').classList.contains('on')) return;
+ const d = document.createElement('div');
+ d.className = 'fl';
+ d.textContent = ['🕊️','✝️','🙏','📖','🌿'][Math.floor(Math.random()*5)];
+ d.style.left = Math.random()*95+'vw';
+ d.style.fontSize = (18+Math.random()*22)+'px';
+ d.style.animationDuration = (6+Math.random()*5)+'s';
+ document.body.appendChild(d);
+ setTimeout(() => d.remove(), 11000);
+}
+setInterval(flyDeco, 600);
+
+function confetti(){
+ const c = document.createElement('div');
+ c.className = 'fl';
+ c.textContent = ['🕊️','✝️','🌿','✨','🙏'][Math.floor(Math.random()*5)];
+ c.style.left = Math.random()*95+'vw';
+ c.style.fontSize = (22+Math.random()*26)+'px';
+ c.style.animationDuration = (3+Math.random()*3)+'s';
+ document.body.appendChild(c);
+ setTimeout(() => c.remove(), 6500);
+}
+
+/* ===== ANGALIA KAMA MTU AMEINGIA TAYARI ===== */
+(async () => {
+ const { data: { session } } = await db.auth.getSession();
+ if(session && session.user){
+   await ingiaKwenyeMfumo(session.user);
+ } else {
+   show('auth');
+ }
+})();
+</script>
+</body>
+  </html>
