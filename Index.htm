@@ -5,40 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TUCASA UDSM Mabibo — Safari Njema</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg:#fdf6ec;--bg2:#f5e6d3;--card:#fffaf3;
- --text:#1a1410;--muted:#8b6f47;
- --gold:#b8860b;--gold-light:#d4a72c;
- --field:#f5ead7;--rose:#8b1e3f;
+ --bg:#0a0a12;--bg2:#12121e;--card:rgba(20,20,35,0.85);
+ --text:#f0f0f5;--muted:#8a8a9e;
+ --cyan:#00e5ff;--purple:#9d4edd;--pink:#ff007f;--gold:#ffd700;
+ --field:rgba(0,0,0,0.4);--border:rgba(157,78,221,0.3);
 }
-@media (prefers-color-scheme:dark){:root{
- --bg:#1a1410;--bg2:#2a1f15;--card:#241b12;
- --text:#f5e6d3;--muted:#b89878;
- --gold:#d4a72c;--gold-light:#e8be55;
- --field:#332618;
-}}
 *{box-sizing:border-box;margin:0}
 html,body{min-height:100%}
-body{font-family:'Lora',Georgia,serif;color:var(--text);
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);
  background:linear-gradient(135deg,var(--bg),var(--bg2));
  display:flex;align-items:center;justify-content:center;
- min-height:100vh;padding:16px;overflow-x:hidden}
+ min-height:100vh;padding:16px;overflow-x:hidden;
+ background-attachment:fixed;
+}
 
-/* ===== WATERMARK MAYUNGA ===== */
+/* ===== WATERMARK MAYUNGA (NEON) ===== */
 .wm-corner{position:fixed;top:14px;right:14px;z-index:999;
  font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:1.5px;
- color:var(--gold);background:rgba(255,250,243,.7);
- padding:6px 16px;border-radius:2px;border:1px solid var(--gold);
+ color:var(--cyan);background:rgba(10,10,18,0.6);
+ padding:6px 16px;border-radius:4px;border:1px solid var(--cyan);
  backdrop-filter:blur(6px);pointer-events:none;user-select:none;
+ text-shadow:0 0 8px rgba(0,229,255,0.6);
  animation:wmPulse 4s ease-in-out infinite}
-@keyframes wmPulse{0%,100%{opacity:.8}50%{opacity:1}}
-@media (prefers-color-scheme:dark){.wm-corner{background:rgba(36,27,18,.75)}}
+@keyframes wmPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
 .wm-bg{position:fixed;top:50%;left:50%;
  font-family:'Cinzel',serif;font-weight:700;font-style:italic;
- font-size:clamp(70px,20vw,200px);color:var(--gold);opacity:.05;
+ font-size:clamp(70px,20vw,200px);
+ color:transparent;-webkit-text-stroke:1px rgba(0,229,255,0.15);
  z-index:0;pointer-events:none;user-select:none;
  letter-spacing:16px;white-space:nowrap;
  animation:wmFloat 24s ease-in-out infinite}
@@ -50,7 +47,7 @@ body{font-family:'Lora',Georgia,serif;color:var(--text);
  100%{transform:translate(-50%,-50%) rotate(-25deg)}}
 
 @media (max-width:640px){
- .wm-corner{font-size:11px;padding:5px 11px;top:8px;right:8px;letter-spacing:1px}
+ .wm-corner{font-size:10px;padding:4px 10px;top:8px;right:8px;letter-spacing:1px}
  .wm-bg{font-size:clamp(50px,28vw,130px);letter-spacing:8px}}
 
 /* ===== SCREENS ===== */
@@ -59,111 +56,122 @@ body{font-family:'Lora',Georgia,serif;color:var(--text);
 .screen.on{display:flex;animation:in .6s ease}
 @keyframes in{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
 
-/* ===== LOGIN/REGISTER ===== */
-.card{position:relative;width:780px;max-width:100%;
- background:var(--card);border-radius:4px;
- box-shadow:0 20px 60px rgba(184,134,11,.15),0 0 0 1px rgba(184,134,11,.2);
- overflow:hidden;min-height:560px}
-.box{position:absolute;top:0;left:0;width:100%;height:100%;
- display:flex;flex-direction:column;align-items:center;justify-content:center;
- padding:30px 40px;gap:12px;transition:all .5s ease}
-.box.up{opacity:0;pointer-events:none}
-.card.reg .box.in{opacity:0;pointer-events:none}
-.card.reg .box.up{opacity:1;pointer-events:auto}
+/* ===== AUTH CARD (Neon Glass) ===== */
+.card{position:relative;width:100%;max-width:420px;
+ background:var(--card);border-radius:16px;
+ box-shadow:0 0 30px rgba(157,78,221,0.2), 0 0 0 1px var(--border);
+ backdrop-filter:blur(16px);
+ overflow:hidden;max-height:90vh;display:flex;flex-direction:column;
+ transition:all .4s ease}
 
-h1.title{font-family:'Cinzel',serif;font-size:26px;font-weight:600;
+/* Headers */
+.auth-header{padding:24px 24px 0;text-align:center}
+h1.title{font-family:'Cinzel',serif;font-size:22px;font-weight:600;
  letter-spacing:3px;color:var(--text);text-align:center;margin-bottom:4px}
-.gold-line{width:50px;height:2px;background:var(--gold);margin:0 auto 12px}
+.gold-line{width:50px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));margin:0 auto 12px;border-radius:2px;box-shadow:0 0 10px var(--purple)}
+.hint{font-size:12px;color:var(--muted);text-align:center;margin-bottom:12px}
 
-.soc{font-size:22px;letter-spacing:6px;margin-bottom:6px}
-.hint{font-size:12px;color:var(--muted);text-align:center;
- font-style:italic;letter-spacing:.5px;margin-bottom:6px}
+/* Forms container */
+.forms{display:flex;flex-direction:column;overflow-y:auto;padding:0 24px 24px}
+.box{display:flex;flex-direction:column;gap:10px;width:100%}
+.box.up{display:none}
+.card.reg .box.in{display:none}
+.card.reg .box.up{display:flex}
 
-input,select{width:100%;max-width:340px;border:1px solid var(--field);
+/* Inputs */
+input,select{width:100%;border:1px solid var(--border);
  background:var(--field);color:var(--text);
- padding:11px 14px;border-radius:2px;font:inherit;font-size:13px;
- outline:0;transition:border .2s}
-input:focus,select:focus{border-color:var(--gold);background:var(--card)}
-label.lbl{font-size:11px;color:var(--muted);letter-spacing:1px;
- text-transform:uppercase;width:100%;max-width:340px;
- text-align:left;margin-bottom:-6px}
+ padding:12px 14px;border-radius:8px;font:inherit;font-size:13px;
+ outline:0;transition:all .3s}
+input:focus,select:focus{border-color:var(--cyan);background:rgba(0,0,0,0.6);box-shadow:0 0 12px rgba(0,229,255,0.2)}
+input::placeholder{color:var(--muted)}
+label.lbl{font-size:10px;color:var(--cyan);letter-spacing:1px;
+ text-transform:uppercase;margin-bottom:-4px;font-weight:600}
 
-.btn{background:var(--text);color:var(--bg);border:0;
- border-radius:2px;padding:12px 44px;font-family:'Cinzel',serif;
- font-size:12px;font-weight:600;letter-spacing:2px;cursor:pointer;
- transition:all .25s;margin-top:6px}
-.btn:hover{background:var(--gold);color:#fff;transform:translateY(-1px)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+/* Buttons */
+.btn{background:linear-gradient(135deg,var(--purple),var(--pink));
+ color:#fff;border:0;border-radius:8px;padding:13px 24px;
+ font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+ letter-spacing:1px;cursor:pointer;transition:all .25s;margin-top:8px;
+ box-shadow:0 0 15px rgba(157,78,221,0.4)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 25px rgba(157,78,221,0.6)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.cyan-btn{background:linear-gradient(135deg,var(--cyan),#00a8cc);box-shadow:0 0 15px rgba(0,229,255,0.4)}
+.cyan-btn:hover{box-shadow:0 0 25px rgba(0,229,255,0.6)}
+.gold-btn{background:linear-gradient(135deg,var(--gold),#cc9900);color:#000;box-shadow:0 0 15px rgba(255,215,0,0.4)}
+.gold-btn:hover{box-shadow:0 0 25px rgba(255,215,0,0.6)}
 
-.sw{display:block;margin-top:16px;font-size:12px;color:var(--gold);
- background:none;border:0;font:inherit;font-style:italic;
- cursor:pointer;letter-spacing:.5px}
-.sw:hover{text-decoration:underline}
+.sw{display:block;margin-top:14px;font-size:12px;color:var(--cyan);
+ background:none;border:0;font:inherit;cursor:pointer;letter-spacing:.5px;
+ text-align:center;transition:all .2s}
+.sw:hover{text-shadow:0 0 10px var(--cyan);color:#fff}
 
-.err{color:var(--rose);min-height:16px;font-size:12px;font-style:italic;
- text-align:center}
-.ok{color:var(--gold);min-height:16px;font-size:12px;font-style:italic;
- text-align:center}
+.err{color:var(--pink);min-height:16px;font-size:12px;text-align:center}
+.ok{color:var(--cyan);min-height:16px;font-size:12px;text-align:center}
 
 /* ===== SPIRITUAL SCREENS ===== */
 .rom{flex-direction:column;text-align:center;max-width:580px;
  gap:20px;padding:20px}
 .big{font-family:'Cinzel',serif;font-weight:600;
- font-size:clamp(28px,6.5vw,46px);line-height:1.3;
+ font-size:clamp(26px,6vw,42px);line-height:1.3;
  letter-spacing:2px;color:var(--text)}
-.big b{color:var(--gold);font-weight:700}
-.sub{color:var(--muted);font-size:14px;font-style:italic;line-height:1.6}
-.dove{font-size:52px;animation:float 3s ease-in-out infinite}
+.big b{color:var(--cyan);font-weight:700;text-shadow:0 0 15px rgba(0,229,255,0.5)}
+.sub{color:var(--muted);font-size:14px;line-height:1.6}
+.dove{font-size:52px;animation:float 3s ease-in-out infinite;
+ filter:drop-shadow(0 0 15px var(--purple))}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-.letter{background:var(--card);border-radius:4px;padding:32px 28px;
- box-shadow:0 20px 50px rgba(184,134,11,.15),0 0 0 1px rgba(184,134,11,.2);
+.letter{background:var(--card);border-radius:12px;padding:28px 24px;
+ box-shadow:0 0 40px rgba(157,78,221,0.15), 0 0 0 1px var(--border);
  text-align:left;display:flex;flex-direction:column;gap:16px;
- border-top:3px solid var(--gold);max-width:520px}
-.letter p{font-size:15px;line-height:1.8;opacity:0;
+ border-top:3px solid var(--cyan);max-width:520px;backdrop-filter:blur(10px)}
+.letter p{font-size:14px;line-height:1.8;opacity:0;
  transform:translateY(10px);animation:rise .8s ease forwards}
 .letter p:nth-child(1){animation-delay:.2s}
 .letter p:nth-child(2){animation-delay:1.4s}
 .letter p:nth-child(3){animation-delay:2.6s}
 .letter p:nth-child(4){animation-delay:3.8s}
 .letter p:nth-child(5){animation-delay:5s}
-.letter .verse{font-family:'Lora',serif;font-style:italic;color:var(--gold);
- font-size:14px;border-left:2px solid var(--gold);padding-left:14px}
-.letter .sig{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);
- text-align:right;letter-spacing:1px;font-weight:600}
+.letter .verse{font-style:italic;color:var(--cyan);
+ font-size:13px;border-left:2px solid var(--cyan);padding-left:14px;
+ text-shadow:0 0 8px rgba(0,229,255,0.3)}
+.letter .sig{font-family:'Cinzel',serif;font-size:13px;color:var(--purple);
+ text-align:right;letter-spacing:1px;font-weight:600;
+ text-shadow:0 0 10px rgba(157,78,221,0.5)}
 @keyframes rise{to{opacity:1;transform:none}}
 
 /* ===== COUNTDOWN ===== */
 .cd-wrap{display:flex;gap:12px;justify-content:center;margin:20px 0;flex-wrap:wrap}
-.cd-box{background:var(--card);border:1px solid var(--gold);
- border-radius:2px;padding:12px 16px;min-width:76px;
- box-shadow:0 8px 20px rgba(184,134,11,.12);transition:transform .3s}
-.cd-box:hover{transform:translateY(-3px)}
+.cd-box{background:rgba(0,0,0,0.5);border:1px solid var(--cyan);
+ border-radius:8px;padding:12px 16px;min-width:76px;
+ box-shadow:0 0 15px rgba(0,229,255,0.2);transition:transform .3s}
+.cd-box:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(0,229,255,0.4)}
 .cd-box b{display:block;font-family:'Cinzel',serif;font-size:26px;
- font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;
- letter-spacing:1px}
+ font-weight:700;color:var(--cyan);font-variant-numeric:tabular-nums;
+ letter-spacing:1px;text-shadow:0 0 10px rgba(0,229,255,0.5)}
 .cd-box small{font-size:9px;color:var(--muted);letter-spacing:2px;
- text-transform:uppercase;font-family:'Cinzel',serif}
-.cd-sign{font-family:'Lora',serif;font-style:italic;font-size:12px;
- color:var(--gold);letter-spacing:1.5px;margin-top:10px}
+ text-transform:uppercase;font-family:'Inter',sans-serif}
+.cd-sign{font-size:12px;color:var(--purple);letter-spacing:1.5px;margin-top:10px;
+ text-shadow:0 0 8px rgba(157,78,221,0.5)}
 
 .btns{position:relative;display:flex;gap:14px;justify-content:center;
  align-items:center;flex-wrap:wrap;margin-top:8px}
-.gold-btn{background:var(--gold);color:#fff}
-.gold-btn:hover{background:var(--gold-light)}
 
 /* ===== DECORATION ===== */
 .fl{position:fixed;bottom:-40px;z-index:1;pointer-events:none;
- animation:fly linear forwards;opacity:.6}
+ animation:fly linear forwards;opacity:.5;
+ filter:drop-shadow(0 0 8px var(--cyan))}
 @keyframes fly{to{transform:translateY(-115vh) rotate(15deg);opacity:0}}
 
-.loading{text-align:center;color:var(--gold);
- font-family:'Cinzel',serif;letter-spacing:2px;font-size:13px}
+.loading{text-align:center;color:var(--cyan);
+ font-family:'Cinzel',serif;letter-spacing:2px;font-size:13px;
+ text-shadow:0 0 10px rgba(0,229,255,0.5)}
 
 @media (max-width:640px){
- .box{padding:24px 20px}
- h1.title{font-size:22px;letter-spacing:2px}
- .btn{padding:11px 34px;font-size:11px}
+ .card{max-height:95vh;border-radius:12px}
+ .box{padding:20px 16px}
+ h1.title{font-size:18px;letter-spacing:2px}
+ .btn{padding:12px 20px;font-size:12px}
  .cd-box{min-width:66px;padding:10px 12px}
  .cd-box b{font-size:22px}}
 
@@ -187,48 +195,46 @@ label.lbl{font-size:11px;color:var(--muted);letter-spacing:1px;
 <!-- ===== AUTH ===== -->
 <div class="screen" id="auth">
  <div class="card" id="card">
-
-  <!-- INGIA -->
-  <div class="box in">
-   <h1 class="title">TUCASA UDSM MABIBO HOSTEL</h1>
+  <div class="auth-header">
+   <h1 class="title">TUCASA UDSM MABIBO</h1>
    <div class="gold-line"></div>
-   <div class="soc">🕊️ 📖</div>
-   <p class="hint">Ingia kwa barua pepe yako</p>
-   <input id="e1" type="email" placeholder="Barua pepe" autocomplete="email">
-   <input id="p1" type="password" placeholder="Nenosiri" autocomplete="current-password">
-   <span class="err" id="er1"></span>
-   <button class="btn" id="go1">INGIA</button>
-   <button class="sw" id="sw1">Huna akaunti? Jisajili →</button>
+   <p class="hint" id="authHint">Ingia kwa barua pepe yako</p>
   </div>
 
-  <!-- JISAJILI -->
-  <div class="box up">
-   <h1 class="title">JIUNGE NASI</h1>
-   <div class="gold-line"></div>
-   <div class="soc">🕊️ 📖</div>
-   <p class="hint">Weka taarifa zako ili tukuandikie baraka</p>
-   <label class="lbl">Jina kamili</label>
-   <input id="n2" type="text" placeholder="mfano: John Mayunga" autocomplete="name">
-   <label class="lbl">Barua pepe</label>
-   <input id="e2" type="email" placeholder="barua@email.com" autocomplete="email">
-   <label class="lbl">Nenosiri (herufi 6+)</label>
-   <input id="p2" type="password" placeholder="••••••" autocomplete="new-password">
-   <label class="lbl">Namba ya simu</label>
-   <input id="s2" type="tel" placeholder="0712 345 678">
-   <label class="lbl">Block / Room (Mabibo)</label>
-   <input id="b2" type="text" placeholder="mfano: Block B, Room 12">
-   <label class="lbl">Mkoa unakoenda</label>
-   <input id="m2" type="text" placeholder="mfano: Mwanza">
-   <label class="lbl">Tarehe ya kurudi UDSM</label>
-   <input id="d2" type="date">
-   <label class="lbl">Ombi lako (si lazima)</label>
-   <input id="o2" type="text" placeholder="Andika ombi lako la maombi...">
-   <span class="err" id="er2"></span>
-   <span class="ok" id="ok2"></span>
-   <button class="btn" id="go2">JISAJILI</button>
-   <button class="sw" id="sw2">← Una akaunti? Ingia</button>
-  </div>
+  <div class="forms" id="forms">
+   <!-- INGIA -->
+   <div class="box in">
+    <input id="e1" type="email" placeholder="Barua pepe" autocomplete="email">
+    <input id="p1" type="password" placeholder="Nenosiri" autocomplete="current-password">
+    <span class="err" id="er1"></span>
+    <button class="btn cyan-btn" id="go1">INGIA</button>
+    <button class="sw" id="sw1">Huna akaunti? Jisajili →</button>
+   </div>
 
+   <!-- JISAJILI -->
+   <div class="box up">
+    <label class="lbl">Jina kamili</label>
+    <input id="n2" type="text" placeholder="mfano: John Mayunga" autocomplete="name">
+    <label class="lbl">Barua pepe</label>
+    <input id="e2" type="email" placeholder="barua@email.com" autocomplete="email">
+    <label class="lbl">Nenosiri (herufi 6+)</label>
+    <input id="p2" type="password" placeholder="••••••" autocomplete="new-password">
+    <label class="lbl">Namba ya simu</label>
+    <input id="s2" type="tel" placeholder="0712 345 678">
+    <label class="lbl">Block / Room (Mabibo)</label>
+    <input id="b2" type="text" placeholder="mfano: Block B, Room 12">
+    <label class="lbl">Mkoa unakoenda</label>
+    <input id="m2" type="text" placeholder="mfano: Mwanza">
+    <label class="lbl">Tarehe ya kurudi UDSM</label>
+    <input id="d2" type="date">
+    <label class="lbl">Ombi lako (si lazima)</label>
+    <input id="o2" type="text" placeholder="Andika ombi lako la maombi...">
+    <span class="err" id="er2"></span>
+    <span class="ok" id="ok2"></span>
+    <button class="btn gold-btn" id="go2">JISAJILI</button>
+    <button class="sw" id="sw2">← Una akaunti? Ingia</button>
+   </div>
+  </div>
  </div>
 </div>
 
@@ -237,7 +243,7 @@ label.lbl{font-size:11px;color:var(--muted);letter-spacing:1px;
  <div class="dove">🕊️</div>
  <h2 class="big">Karibu,<br><b><span id="jina1">Mwanachama</span></b></h2>
  <p class="sub">TUCASA UDSM Mabibo inakupokea kwa mikono miwili.</p>
- <div class="btns"><button class="btn" data-next="letter">KARIBU 🙏</button></div>
+ <div class="btns"><button class="btn cyan-btn" data-next="letter">KARIBU 🙏</button></div>
 </div>
 
 <!-- ===== BARAKA ===== -->
@@ -248,9 +254,9 @@ label.lbl{font-size:11px;color:var(--muted);letter-spacing:1px;
   <p class="verse">"Bwana akulinde na kila uovu; Bwana aulinde uhai wako. Bwana aulinde uende na uje, tangu sasa na hata milele." — Zaburi 121:7-8</p>
   <p>Tunakutakia safari njema unaporejea masomoni. Mungu akutangulie, akulinde njiani, na akufikishe salama UDSM.</p>
   <p class="verse">"Usiuogope, kwa maana mimi ni pamoja nawe; nitakutia nguvu, naam, nitakusaidia." — Isaya 41:10</p>
-  <p class="sig">Wenu katika Kristo,<br>TUCASA UDSM MABIBO </p>
+  <p class="sig">Wenu katika Kristo,<br>TUCASA UDSM MABIBO</p>
  </div>
- <div class="btns"><button class="btn" data-next="sendoff">ENDELEA</button></div>
+ <div class="btns"><button class="btn cyan-btn" data-next="sendoff">ENDELEA</button></div>
 </div>
 
 <!-- ===== SEND-OFF + COUNTDOWN ===== -->
@@ -269,8 +275,8 @@ label.lbl{font-size:11px;color:var(--muted);letter-spacing:1px;
 
  <div class="btns">
   <button class="btn gold-btn" id="amina">AMINA 🙏</button>
-  <button class="btn" id="tena">SOMA ZAIDI</button>
-  <button class="btn" id="toka" style="background:transparent;color:var(--muted);border:1px solid var(--field)">TOKA</button>
+  <button class="btn cyan-btn" id="tena">SOMA ZAIDI</button>
+  <button class="btn" id="toka" style="background:transparent;color:var(--muted);border:1px solid var(--border);box-shadow:none">TOKA</button>
  </div>
 </div>
 
@@ -297,8 +303,16 @@ function show(id){
 }
 
 /* ===== BADILISHA AUTH ===== */
-$('sw1').onclick = () => $('card').classList.add('reg');
-$('sw2').onclick = () => $('card').classList.remove('reg');
+$('sw1').onclick = () => {
+ $('card').classList.add('reg');
+ $('authHint').textContent = "Weka taarifa zako ili tukuandikie baraka";
+ $('forms').scrollTop = 0;
+};
+$('sw2').onclick = () => {
+ $('card').classList.remove('reg');
+ $('authHint').textContent = "Ingia kwa barua pepe yako";
+ $('forms').scrollTop = 0;
+};
 
 /* ===== WEKA JINA KILA MAHALI ===== */
 function wekaJina(jina){
@@ -383,7 +397,7 @@ function updateCountdown(){
  if(!mwanachama.tarehe_safari) return;
  const tofauti = mwanachama.tarehe_safari - Date.now();
  if(tofauti <= 0){
-   $('countdown').innerHTML = '<p class="cd-sign" style="font-size:18px">🕊️ Safari imefika! Mungu akubariki.</p>';
+   $('countdown').innerHTML = '<p class="cd-sign" style="font-size:18px;color:var(--cyan)">🕊️ Safari imefika! Mungu akubariki.</p>';
    return;
  }
  const siku = Math.floor(tofauti / 86400000);
@@ -422,7 +436,7 @@ const verses = [
 let iV = 0;
 $('tena').onclick = () => {
  const v = verses[iV % verses.length]; iV++;
- $('sendsub').innerHTML = '<em style="color:var(--gold)">"'+v.t+'"</em><br><br><strong style="font-family:Cinzel,serif;letter-spacing:1px">— '+v.v+'</strong>';
+ $('sendsub').innerHTML = '<em style="color:var(--cyan);text-shadow:0 0 8px rgba(0,229,255,0.3)">"'+v.t+'"</em><br><br><strong style="font-family:Cinzel,serif;letter-spacing:1px;color:var(--purple)">— '+v.v+'</strong>';
 };
 
 /* ===== TOKA ===== */
@@ -468,4 +482,4 @@ function confetti(){
 })();
 </script>
 </body>
-  </html>
+</html>
